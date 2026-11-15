@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Resin Rush</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=DM+Sans:wght@400;500;700&amp;family=Cormorant+Garamond:ital,wght@1,600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'DM Sans',system-ui,sans-serif;color:#F8EEF2;background:#150C17}
+h1,h2,h3{font-family:'Sora',system-ui,sans-serif;margin:0;font-weight:700;color:#F8EEF2}
+p{margin:0}
+a{color:#FFC9A6}a:hover{color:#FFFFFF}
+.serif{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:600}
+.gradtext{background:linear-gradient(90deg,#FFC9A6,#FF8FB1,#B28DFF,#FFC9A6);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 6s linear infinite}
+.glass{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.card{transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease}
+.card:hover{transform:translateY(-8px);box-shadow:0 0 44px rgba(255,143,177,.35);border-color:rgba(255,143,177,.6)}
+.btn{display:inline-block;text-decoration:none;color:#1A0F1A;font-weight:700;border-radius:999px;transition:transform .25s ease}
+.btn:hover{transform:scale(1.05);color:#1A0F1A}
+.pulse{animation:pulse 2.8s ease-in-out infinite}
+.ghost{display:inline-block;text-decoration:none;color:#F8EEF2;font-weight:700;border-radius:999px;border:1px solid rgba(255,255,255,.35);transition:box-shadow .3s ease,border-color .3s ease}
+.ghost:hover{color:#FFFFFF;border-color:#FF8FB1;box-shadow:0 0 28px rgba(255,143,177,.45)}
+.orb{border-radius:60% 40% 55% 45% / 50% 60% 40% 50%;animation:morph 9s ease-in-out infinite,orbglow 4s ease-in-out infinite}
+.field{width:100%;box-sizing:border-box;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:14px 16px;font:inherit;font-size:16px;color:#F8EEF2;outline:none;transition:border-color .25s,box-shadow .25s}
+.field::placeholder{color:#B9A2B1}
+.field:focus{border-color:#FF8FB1;box-shadow:0 0 0 3px rgba(255,143,177,.25),0 0 24px rgba(255,143,177,.3)}
+.pill{cursor:pointer;font:inherit;font-size:15px;font-weight:700;border-radius:999px;padding:12px 20px;min-height:44px;transition:box-shadow .25s,transform .2s}
+.pill:hover{transform:translateY(-2px)}
+.lbl{font-size:14px;font-weight:700;letter-spacing:.04em;color:#FFC9A6}
+.glowball{border-radius:50%;filter:blur(70px);animation:drift 14s ease-in-out infinite alternate}
+.shimmer{background:linear-gradient(110deg,rgba(255,255,255,.04) 30%,rgba(255,255,255,.16) 50%,rgba(255,255,255,.04) 70%);background-size:200% 100%;animation:sheen 3.2s linear infinite}
+.track{display:flex;width:max-content;animation:scroll 30s linear infinite}
+.ring{transform-box:view-box;transform-origin:200px 200px;animation:spin 26s linear infinite}
+.ring2{transform-box:view-box;transform-origin:200px 200px;animation:spin 18s linear infinite reverse}
+.fl{transform-box:fill-box;transform-origin:100% 50%;animation:flapL .7s ease-in-out infinite alternate}
+.fr{transform-box:fill-box;transform-origin:0% 50%;animation:flapR .7s ease-in-out infinite alternate}
+.bob1{animation:bob 5s ease-in-out infinite}
+.bob2{animation:bob 6.5s ease-in-out infinite reverse}
+.tw{transform-box:fill-box;transform-origin:center;animation:twinkle 2.4s ease-in-out infinite}
+.tw2{transform-box:fill-box;transform-origin:center;animation:twinkle 3.1s ease-in-out infinite .8s}
+@keyframes flow{to{background-position:200% center}}
+@keyframes pulse{0%,100%{box-shadow:0 0 24px rgba(255,143,177,.45)}50%{box-shadow:0 0 56px rgba(178,141,255,.7)}}
+@keyframes morph{0%,100%{border-radius:60% 40% 55% 45% / 50% 60% 40% 50%}33%{border-radius:42% 58% 38% 62% / 58% 42% 58% 42%}66%{border-radius:55% 45% 62% 38% / 40% 55% 45% 60%}}
+@keyframes orbglow{0%,100%{box-shadow:0 0 60px rgba(255,143,177,.45),inset 0 0 50px rgba(255,255,255,.25)}50%{box-shadow:0 0 110px rgba(178,141,255,.65),inset 0 0 70px rgba(255,255,255,.35)}}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(60px,40px) scale(1.2)}}
+@keyframes sheen{to{background-position:-200% 0}}
+@keyframes scroll{to{transform:translateX(-50%)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes flapL{from{transform:scaleX(1)}to{transform:scaleX(.3)}}
+@keyframes flapR{from{transform:scaleX(1)}to{transform:scaleX(.3)}}
+@keyframes bob{0%,100%{transform:translate(0,0)}50%{transform:translate(8px,-14px)}}
+@keyframes twinkle{0%,100%{opacity:.25;transform:scale(.6)}50%{opacity:1;transform:scale(1.15)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+
+<div style="position:relative;overflow:hidden;width:100%;box-sizing:border-box;background-color:#150C17;background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1px);background-size:28px 28px">
+
+<!-- ambient glow -->
+<div class="glowball" style="position:absolute;top:-120px;left:-160px;width:520px;height:520px;background:rgba(255,143,177,.35)"></div>
+<div class="glowball" style="position:absolute;top:380px;right:-180px;width:560px;height:560px;background:rgba(178,141,255,.32);animation-delay:-5s"></div>
+<div class="glowball" style="position:absolute;top:1500px;left:-200px;width:520px;height:520px;background:rgba(255,201,166,.2);animation-delay:-9s"></div>
+<div class="glowball" style="position:absolute;top:2300px;right:-160px;width:520px;height:520px;background:rgba(255,143,177,.28);animation-delay:-3s"></div>
+
+<div style="position:relative;z-index:1">
+
+<!-- NAV -->
+<div style="max-width:1200px;margin:0 auto;padding:20px 24px;box-sizing:border-box">
+<div class="glass" style="border-radius:999px;padding:12px 16px 12px 22px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+<div style="display:flex;align-items:center;gap:10px">
+<svg width="34" height="34" viewBox="-30 -26 60 56" aria-hidden="true"><defs><linearGradient id="navw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFC9A6"></stop><stop offset="1" stop-color="#FF8FB1"></stop></linearGradient></defs><g class="fl"><path d="M0 0 C-10 -24 -28 -26 -29 -12 C-30 -2 -12 6 0 0 Z" fill="url(#navw)"></path><path d="M0 2 C-10 6 -20 18 -13 23 C-7 25 -1 12 0 2 Z" fill="url(#navw)"></path></g><g class="fr"><path d="M0 0 C10 -24 28 -26 29 -12 C30 -2 12 6 0 0 Z" fill="url(#navw)"></path><path d="M0 2 C10 6 20 18 13 23 C7 25 1 12 0 2 Z" fill="url(#navw)"></path></g></svg>
+<span style="font-family:'Sora',system-ui,sans-serif;font-size:22px;font-weight:700;color:#F8EEF2">Resin Rush</span>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-size:16px">
+<a href="#shop" style="text-decoration:none;color:#F8EEF2">Shop</a>
+<a href="#order" style="text-decoration:none;color:#F8EEF2">How to order</a>
+<a href="#about" style="text-decoration:none;color:#F8EEF2">About</a>
+<a class="btn" href="#order-form" style="background:linear-gradient(135deg,{{accent}},#B28DFF);padding:12px 22px">Order now</a>
+</div>
+</div>
+</div>
+
+<!-- HERO -->
+<div style="max-width:1200px;margin:0 auto;padding:40px 24px 72px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:40px;align-items:center">
+<div style="flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:26px">
+<p class="glass" style="align-self:flex-start;border-radius:999px;padding:8px 16px;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:#FFC9A6;font-weight:700">Handmade in Ludhiana, Punjab</p>
+<h1 style="font-size:clamp(42px,7.2vw,84px);line-height:1.02">Resin art that <span class="gradtext">glows</span>, made to be <span class="serif" style="font-size:1.15em;color:#FFC9A6">loved.</span></h1>
+<p style="font-size:20px;line-height:1.55;color:#E3CFDA;max-width:540px">Handcrafted resin products and nail sets, each one poured, set and finished by hand. Find something for yourself, or for someone you adore.</p>
+<div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:6px">
+<a class="btn pulse" href="#order-form" style="background:linear-gradient(135deg,{{accent}},#B28DFF);padding:18px 32px;font-size:17px">Place an order</a>
+<a class="ghost" href="#shop" style="padding:17px 30px;font-size:17px">See the collection</a>
+</div>
+</div>
+
+<!-- hero art -->
+<div style="flex:1 1 380px;min-width:0;display:flex;justify-content:center">
+<div style="position:relative;width:100%;max-width:480px;aspect-ratio:1/1">
+<div class="orb" style="position:absolute;inset:16%;background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.75),rgba(255,201,166,.55) 18%,#FF8FB1 45%,#B28DFF 78%,#5B3A9E)"></div>
+<svg viewBox="0 0 400 400" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true" fill="none">
+<defs>
+<linearGradient id="wg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFC9A6"></stop><stop offset="0.55" stop-color="#FF8FB1"></stop><stop offset="1" stop-color="#B28DFF"></stop></linearGradient>
+<filter id="gl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b"></feGaussianBlur><feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter>
+</defs>
+<g class="ring"><circle cx="200" cy="200" r="188" stroke="rgba(255,255,255,.35)" stroke-width="1.2" stroke-dasharray="3 9"></circle><circle cx="200" cy="12" r="5" fill="#FFC9A6" filter="url(#gl)"></circle></g>
+<g class="ring2"><circle cx="200" cy="200" r="158" stroke="rgba(255,143,177,.45)" stroke-width="1" stroke-dasharray="40 14 6 14"></circle><circle cx="200" cy="358" r="4" fill="#B28DFF" filter="url(#gl)"></circle></g>
+<g transform="translate(78 92) rotate(-18) scale(0.95)"><g class="bob1" filter="url(#gl)"><g class="fl"><path d="M0 0 C-10 -34 -48 -42 -52 -18 C-54 -2 -22 8 0 0 Z" fill="url(#wg)"></path><path d="M0 2 C-18 8 -34 30 -22 38 C-12 42 -2 20 0 2 Z" fill="url(#wg)" opacity=".85"></path></g><g class="fr"><path d="M0 0 C10 -34 48 -42 52 -18 C54 -2 22 8 0 0 Z" fill="url(#wg)"></path><path d="M0 2 C18 8 34 30 22 38 C12 42 2 20 0 2 Z" fill="url(#wg)" opacity=".85"></path></g><rect x="-1.5" y="-10" width="3" height="30" rx="1.5" fill="#F8EEF2"></rect></g></g>
+<g transform="translate(328 292) rotate(14) scale(0.7)"><g class="bob2" filter="url(#gl)"><g class="fl"><path d="M0 0 C-10 -34 -48 -42 -52 -18 C-54 -2 -22 8 0 0 Z" fill="url(#wg)"></path><path d="M0 2 C-18 8 -34 30 -22 38 C-12 42 -2 20 0 2 Z" fill="url(#wg)" opacity=".85"></path></g><g class="fr"><path d="M0 0 C10 -34 48 -42 52 -18 C54 -2 22 8 0 0 Z" fill="url(#wg)"></path><path d="M0 2 C18 8 34 30 22 38 C12 42 2 20 0 2 Z" fill="url(#wg)" opacity=".85"></path></g><rect x="-1.5" y="-10" width="3" height="30" rx="1.5" fill="#F8EEF2"></rect></g></g>
+<g transform="translate(332 78) scale(0.5)"><g class="bob1"><g class="fl"><path d="M0 0 C-10 -34 -48 -42 -52 -18 C-54 -2 -22 8 0 0 Z" fill="#FFC9A6"></path><path d="M0 2 C-18 8 -34 30 -22 38 C-12 42 -2 20 0 2 Z" fill="#FFC9A6" opacity=".8"></path></g><g class="fr"><path d="M0 0 C10 -34 48 -42 52 -18 C54 -2 22 8 0 0 Z" fill="#FFC9A6"></path><path d="M0 2 C18 8 34 30 22 38 C12 42 2 20 0 2 Z" fill="#FFC9A6" opacity=".8"></path></g></g></g>
+<path class="tw" d="M60 250 L64 262 L76 266 L64 270 L60 282 L56 270 L44 266 L56 262 Z" fill="#FFFFFF"></path>
+<path class="tw2" d="M350 180 L353 189 L362 192 L353 195 L350 204 L347 195 L338 192 L347 189 Z" fill="#FFC9A6"></path>
+<path class="tw" d="M210 50 L212 56 L218 58 L212 60 L210 66 L208 60 L202 58 L208 56 Z" fill="#FFFFFF"></path>
+<path class="tw2" d="M140 352 L143 360 L151 363 L143 366 L140 374 L137 366 L129 363 L137 360 Z" fill="#B28DFF"></path>
+</svg>
+</div>
+</div>
+</div>
+
+<!-- MARQUEE -->
+<div style="border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);overflow:hidden;padding:18px 0">
+<div class="track" style="font-family:'Sora',system-ui,sans-serif;font-size:22px;font-weight:600;color:#F8EEF2;white-space:nowrap">
+<span style="padding:0 28px">Resin products</span><span style="color:#FF8FB1">✦</span><span style="padding:0 28px">Nail art</span><span style="color:#FF8FB1">✦</span><span style="padding:0 28px">Handmade in Ludhiana</span><span style="color:#FF8FB1">✦</span><span style="padding:0 28px">Made with care</span><span style="color:#FF8FB1">✦</span><span style="padding:0 28px">Resin products</span><span style="color:#FF8FB1">✦</span><span style="padding:0 28px">Nail art</span><span style="color:#FF8FB1">✦</span><span style="padding:0 28px">Handmade in Ludhiana</span><span style="color:#FF8FB1">✦</span><span style="padding:0 28px">Made with care</span><span style="color:#FF8FB1">✦</span>
+</div>
+</div>
+
+<!-- FEATURES -->
+<div style="max-width:1200px;margin:0 auto;padding:80px 24px 24px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:24px">
+<div class="glass card" style="flex:1 1 280px;min-width:0;border-radius:28px;padding:32px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px">
+<svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#FF8FB1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 5 C22 5 9 19 9 28 A13 13 0 0 0 35 28 C35 19 22 5 22 5 Z"></path><path d="M16 29 A6 6 0 0 0 22 35" opacity=".6"></path></svg>
+<h3 style="font-size:24px">Poured by hand</h3>
+<p style="font-size:17px;line-height:1.55;color:#E3CFDA">Every piece is made by hand, one at a time, so each one is a little different.</p>
+</div>
+<div class="glass card" style="flex:1 1 280px;min-width:0;border-radius:28px;padding:32px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px">
+<svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#B28DFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 6 L26 17 L38 18 L29 26 L32 38 L22 31 L12 38 L15 26 L6 18 L18 17 Z"></path></svg>
+<h3 style="font-size:24px">Resin and nails</h3>
+<p style="font-size:17px;line-height:1.55;color:#E3CFDA">Resin keepsakes for your space, and nail sets for your next look.</p>
+</div>
+<div class="glass card" style="flex:1 1 280px;min-width:0;border-radius:28px;padding:32px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px">
+<svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#FFC9A6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 10 H38 V30 H20 L12 37 V30 H6 Z"></path><path d="M14 18 H30 M14 23 H24" opacity=".6"></path></svg>
+<h3 style="font-size:24px">Order by message</h3>
+<p style="font-size:17px;line-height:1.55;color:#E3CFDA">Just send us a DM on Instagram. Tell us what you love and we'll take it from there.</p>
+</div>
+</div>
+
+<!-- SHOP -->
+<div id="shop" style="max-width:1200px;margin:0 auto;padding:72px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:12px;max-width:640px">
+<h2 style="font-size:clamp(34px,5vw,52px);line-height:1.1">The <span class="gradtext">collection</span></h2>
+<p style="font-size:18px;line-height:1.55;color:#E3CFDA">Two things we do best. Message us on Instagram to ask what's in stock or to request something custom.</p>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:28px">
+<div class="glass card" style="flex:1 1 360px;min-width:0;border-radius:32px;padding:18px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px">
+<div class="shimmer" style="width:100%;height:300px;border-radius:22px;border:1px dashed rgba(255,255,255,.3);box-sizing:border-box;display:flex;align-items:center;justify-content:center;color:#E3CFDA;font-size:15px;text-align:center;padding:16px">[PHOTO: resin products]</div>
+<div style="padding:0 10px 10px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-size:32px">Resin Products</h3>
+<p style="font-size:17px;line-height:1.55;color:#E3CFDA">[LIST YOUR RESIN ITEMS, e.g. keychains, coasters, trinket trays]</p>
+<p style="font-size:17px;font-weight:700;color:#FFC9A6">Starting from [YOUR PRICE]</p>
+</div>
+</div>
+<div class="glass card" style="flex:1 1 360px;min-width:0;border-radius:32px;padding:18px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px">
+<div class="shimmer" style="width:100%;height:300px;border-radius:22px;border:1px dashed rgba(255,255,255,.3);box-sizing:border-box;display:flex;align-items:center;justify-content:center;color:#E3CFDA;font-size:15px;text-align:center;padding:16px">[PHOTO: nail sets]</div>
+<div style="padding:0 10px 10px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-size:32px">Nails</h3>
+<p style="font-size:17px;line-height:1.55;color:#E3CFDA">[DESCRIBE YOUR NAIL SETS, e.g. press-ons, custom designs]</p>
+<p style="font-size:17px;font-weight:700;color:#FFC9A6">Starting from [YOUR PRICE]</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- GALLERY -->
+<div style="max-width:1200px;margin:0 auto;padding:48px 24px 72px;box-sizing:border-box;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between">
+<h2 style="font-size:clamp(34px,5vw,52px);line-height:1.1">Fresh from the <span class="serif" style="font-size:1.12em;color:#FFC9A6">studio</span></h2>
+<a href="https://www.instagram.com/resin_rush_xo/" style="font-weight:700">See more on Instagram</a>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:18px">
+<div class="shimmer card" style="flex:1 1 240px;aspect-ratio:1/1;border-radius:24px;border:1px solid rgba(255,255,255,.14);box-sizing:border-box;display:flex;align-items:center;justify-content:center;color:#E3CFDA;font-size:15px">[PHOTO 1]</div>
+<div class="shimmer card" style="flex:1 1 240px;aspect-ratio:1/1;border-radius:24px;border:1px solid rgba(255,255,255,.14);box-sizing:border-box;display:flex;align-items:center;justify-content:center;color:#E3CFDA;font-size:15px;animation-delay:-.6s">[PHOTO 2]</div>
+<div class="shimmer card" style="flex:1 1 240px;aspect-ratio:1/1;border-radius:24px;border:1px solid rgba(255,255,255,.14);box-sizing:border-box;display:flex;align-items:center;justify-content:center;color:#E3CFDA;font-size:15px;animation-delay:-1.2s">[PHOTO 3]</div>
+<div class="shimmer card" style="flex:1 1 240px;aspect-ratio:1/1;border-radius:24px;border:1px solid rgba(255,255,255,.14);box-sizing:border-box;display:flex;align-items:center;justify-content:center;color:#E3CFDA;font-size:15px;animation-delay:-1.8s">[PHOTO 4]</div>
+<div class="shimmer card" style="flex:1 1 240px;aspect-ratio:1/1;border-radius:24px;border:1px solid rgba(255,255,255,.14);box-sizing:border-box;display:flex;align-items:center;justify-content:center;color:#E3CFDA;font-size:15px;animation-delay:-2.4s">[PHOTO 5]</div>
+<div class="shimmer card" style="flex:1 1 240px;aspect-ratio:1/1;border-radius:24px;border:1px solid rgba(255,255,255,.14);box-sizing:border-box;display:flex;align-items:center;justify-content:center;color:#E3CFDA;font-size:15px;animation-delay:-3s">[PHOTO 6]</div>
+</div>
+</div>
+
+<!-- HOW TO ORDER -->
+<div id="order" style="max-width:1200px;margin:0 auto;padding:24px 24px 72px;box-sizing:border-box">
+<div class="glass" style="border-radius:40px;padding:56px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:40px;box-shadow:0 0 80px rgba(178,141,255,.2)">
+<h2 style="font-size:clamp(34px,5vw,52px);line-height:1.1">How to <span class="gradtext">order</span></h2>
+<div style="display:flex;flex-wrap:wrap;gap:32px">
+<div style="flex:1 1 260px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<span style="width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Sora',system-ui,sans-serif;font-size:24px;font-weight:700;color:#1A0F1A;background:linear-gradient(135deg,#FFC9A6,#FF8FB1);box-shadow:0 0 28px rgba(255,143,177,.6)">1</span>
+<h3 style="font-size:26px">Pick your piece</h3>
+<p style="font-size:17px;line-height:1.55;color:#E3CFDA">Browse the collection here or on our Instagram feed and note what you like.</p>
+</div>
+<div style="flex:1 1 260px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<span style="width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Sora',system-ui,sans-serif;font-size:24px;font-weight:700;color:#1A0F1A;background:linear-gradient(135deg,#FF8FB1,#B28DFF);box-shadow:0 0 28px rgba(178,141,255,.6)">2</span>
+<h3 style="font-size:26px">Fill the order form</h3>
+<p style="font-size:17px;line-height:1.55;color:#E3CFDA">Tell us what you want, your colours and your city. The form builds one clear message for you to send.</p>
+</div>
+<div style="flex:1 1 260px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<span style="width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Sora',system-ui,sans-serif;font-size:24px;font-weight:700;color:#1A0F1A;background:linear-gradient(135deg,#B28DFF,#FFC9A6);box-shadow:0 0 28px rgba(255,201,166,.6)">3</span>
+<h3 style="font-size:26px">We confirm and make it</h3>
+<p style="font-size:17px;line-height:1.55;color:#E3CFDA">We reply to confirm price, delivery and payment, then make your order. [ADD DELIVERY DETAILS]</p>
+</div>
+</div>
+<div>
+<a class="btn pulse" href="#order-form" style="background:linear-gradient(135deg,{{accent}},#B28DFF);padding:18px 32px;font-size:17px">Go to the order form</a>
+</div>
+</div>
+</div>
+
+<!-- ORDER FORM -->
+<div id="order-form" style="max-width:1200px;margin:0 auto;padding:0 24px 88px;box-sizing:border-box;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px;max-width:680px">
+<h2 style="font-size:clamp(34px,5vw,52px);line-height:1.1">Place your <span class="gradtext">order</span></h2>
+<p style="font-size:18px;line-height:1.55;color:#E3CFDA">Fill this in and we'll build a clear, complete message for you. Send it on Instagram or WhatsApp and we'll reply to confirm price, delivery and payment.</p>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+
+<div class="glass" style="flex:1 1 440px;min-width:0;border-radius:32px;padding:32px;box-sizing:border-box;display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<label class="lbl" for="f-name">Your name</label>
+<input class="field" id="f-name" type="text" autocomplete="name" placeholder="Your name" value="{{name}}" onChange="{{onName}}">
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<span class="lbl">What are you ordering?</span>
+<div style="display:flex;flex-wrap:wrap;gap:12px">
+<sc-for list="{{cats}}" as="c" hint-placeholder-count="3">
+<button class="pill" type="button" aria-pressed="{{c.pressed}}" onClick="{{c.pick}}" style="{{c.style}}">{{c.label}}</button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<label class="lbl" for="f-item">Describe the item</label>
+<textarea class="field" id="f-item" rows="3" placeholder="What would you like us to make?" value="{{item}}" onChange="{{onItem}}" style="resize:vertical"></textarea>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<label class="lbl" for="f-colours">Colours or theme</label>
+<input class="field" id="f-colours" type="text" placeholder="Colours, theme or inspiration" value="{{colours}}" onChange="{{onColours}}">
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:18px">
+<div style="flex:1 1 120px;min-width:0;display:flex;flex-direction:column;gap:8px">
+<label class="lbl" for="f-qty">Quantity</label>
+<input class="field" id="f-qty" type="number" min="1" value="{{qty}}" onChange="{{onQty}}">
+</div>
+<div style="flex:2 1 200px;min-width:0;display:flex;flex-direction:column;gap:8px">
+<label class="lbl" for="f-city">City / delivery area</label>
+<input class="field" id="f-city" type="text" autocomplete="address-level2" placeholder="Where should we deliver?" value="{{city}}" onChange="{{onCity}}">
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<label class="lbl" for="f-needed">Needed by</label>
+<input class="field" id="f-needed" type="text" placeholder="A date or occasion" value="{{needed}}" onChange="{{onNeeded}}">
+</div>
+</div>
+
+<div class="glass" style="flex:1 1 380px;min-width:0;border-radius:32px;padding:32px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;box-shadow:0 0 70px rgba(255,143,177,.22)">
+<h3 style="font-size:26px">Your message</h3>
+<div style="white-space:pre-wrap;word-break:break-word;font-size:16px;line-height:1.6;color:#F8EEF2;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:20px">{{message}}</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<a class="btn pulse" href="https://ig.me/m/resin_rush_xo" target="_blank" rel="noopener" onClick="{{copyMsg}}" style="text-align:center;background:linear-gradient(135deg,{{accent}},#B28DFF);padding:16px 24px;font-size:17px">Copy message &amp; open Instagram DM</a>
+<sc-if value="{{hasWa}}" hint-placeholder-val="{{false}}">
+<a class="btn" href="{{waHref}}" target="_blank" rel="noopener" style="display:block;text-align:center;background:#25D366;padding:16px 24px;font-size:17px">Send on WhatsApp</a>
+</sc-if>
+<button class="ghost" type="button" onClick="{{copyMsg}}" style="background:transparent;cursor:pointer;font:inherit;font-size:16px;padding:14px 24px;min-height:44px">Copy message only</button>
+</div>
+<div aria-live="polite" style="min-height:24px;font-size:15px;line-height:1.5">
+<sc-if value="{{copied}}" hint-placeholder-val="{{false}}"><p style="color:#FFC9A6;font-weight:700">Copied! Paste it into the chat and send.</p></sc-if>
+<sc-if value="{{copyFailed}}" hint-placeholder-val="{{false}}"><p style="color:#FFC9A6">Couldn't copy automatically. Select the message above, copy it, then paste it into the chat.</p></sc-if>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" style="max-width:1200px;margin:0 auto;padding:24px 24px 88px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+<div style="flex:1 1 320px;min-width:0;display:flex;justify-content:center">
+<div class="orb shimmer" style="width:100%;max-width:380px;aspect-ratio:1/1;border:1px solid rgba(255,255,255,.25);box-sizing:border-box;display:flex;align-items:center;justify-content:center;text-align:center;color:#E3CFDA;font-size:15px;padding:24px">[PHOTO: the maker at work]</div>
+</div>
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:20px">
+<h2 style="font-size:clamp(34px,5vw,52px);line-height:1.1">Made by hand, <span class="serif" style="font-size:1.12em;color:#FFC9A6">with care</span></h2>
+<p style="font-size:18px;line-height:1.6;color:#E3CFDA">Resin Rush is a small handmade studio in Ludhiana, Punjab. Every product is made by hand, so no two pieces are exactly alike.</p>
+<p style="font-size:18px;line-height:1.6;color:#E3CFDA">[ADD YOUR STORY: how you started, what you love about resin and nail art]</p>
+</div>
+</div>
+
+<!-- FOOTER -->
+<div style="border-top:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04)">
+<div style="max-width:1200px;margin:0 auto;padding:48px 24px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="font-family:'Sora',system-ui,sans-serif;font-size:28px;font-weight:700;color:#F8EEF2">Resin Rush</span>
+<p style="font-size:16px;color:#E3CFDA">Resin products &amp; nails · Ludhiana, Punjab</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;font-size:16px">
+<a href="https://www.instagram.com/resin_rush_xo/" style="font-weight:700">Instagram: @resin_rush_xo</a>
+<p style="color:#E3CFDA">WhatsApp: [ADD NUMBER]</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#FF8FB1","options":["#FF8FB1","#FFC9A6","#B28DFF"]},"whatsapp":{"editor":"text","default":"","section":"Contact"},"$preview":{"width":1280,"height":4000}}'>
+class Component extends DCLogic {
+state = { name: '', category: 'Resin products', item: '', colours: '', qty: '1', city: '', needed: '', copied: false, copyFailed: false };
+message() {
+const s = this.state;
+const lines = ["Hi Resin Rush! I'd like to place an order.", ''];
+if (s.name.trim()) lines.push('Name: ' + s.name.trim());
+lines.push('Category: ' + s.category);
+if (s.item.trim()) lines.push('Item: ' + s.item.trim());
+if (s.colours.trim()) lines.push('Colours / theme: ' + s.colours.trim());
+if (String(s.qty).trim()) lines.push('Quantity: ' + String(s.qty).trim());
+if (s.city.trim()) lines.push('City: ' + s.city.trim());
+if (s.needed.trim()) lines.push('Needed by: ' + s.needed.trim());
+lines.push('', 'Please let me know the price, delivery and payment details. Thank you!');
+return lines.join('\n');
+}
+renderVals() {
+const s = this.state;
+const msg = this.message();
+const digits = String(this.props.whatsapp ?? '').replace(/\D/g, '');
+const set = (k) => (e) => this.setState({ [k]: e.target.value, copied: false, copyFailed: false });
+const on = 'background:linear-gradient(135deg,#FF8FB1,#B28DFF);color:#1A0F1A;border:1px solid transparent;box-shadow:0 0 22px rgba(255,143,177,.5)';
+const off = 'background:transparent;color:#F8EEF2;border:1px solid rgba(255,255,255,.3)';
+const cats = ['Resin products', 'Nails', 'Something custom'].map((c) => ({
+label: c,
+pressed: s.category === c ? 'true' : 'false',
+style: s.category === c ? on : off,
+pick: () => this.setState({ category: c, copied: false, copyFailed: false })
+}));
+return {
+accent: this.props.accent ?? '#FF8FB1',
+name: s.name, item: s.item, colours: s.colours, qty: s.qty, city: s.city, needed: s.needed,
+onName: set('name'), onItem: set('item'), onColours: set('colours'), onQty: set('qty'), onCity: set('city'), onNeeded: set('needed'),
+cats,
+message: msg,
+hasWa: digits.length > 0,
+waHref: 'https://wa.me/' + digits + '?text=' + encodeURIComponent(msg),
+copied: s.copied,
+copyFailed: s.copyFailed,
+copyMsg: () => {
+try {
+navigator.clipboard.writeText(msg).then(
+() => this.setState({ copied: true, copyFailed: false }),
+() => this.setState({ copied: false, copyFailed: true })
+);
+} catch (err) {
+this.setState({ copied: false, copyFailed: true });
+}
+}
+};
+}
+}
+</script>
+</body>
+</html>
