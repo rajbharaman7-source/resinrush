@@ -269,6 +269,7 @@ a{color:#FFC9A6}a:hover{color:#FFFFFF}
 <div id="preview" style="white-space:pre-wrap;word-break:break-word;font-size:16px;line-height:1.6;color:#F8EEF2;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:20px"></div>
 <div style="display:flex;flex-direction:column;gap:12px">
 <a id="igBtn" class="btn gbtn pulse" href="https://ig.me/m/resin_rush_xo" target="_blank" rel="noopener" style="text-align:center;padding:16px 24px;font-size:17px">Copy message &amp; open Instagram DM</a>
+<p style="font-size:14px;line-height:1.5;color:#CDB6C4;text-align:center">If the chat doesn't open, <a id="igProfile" href="https://www.instagram.com/resin_rush_xo/" target="_blank" rel="noopener">open the profile</a>, tap <strong>Message</strong> and paste.</p>
 <a id="waBtn" class="btn" href="#" target="_blank" rel="noopener" style="display:none;text-align:center;background:#25D366;padding:16px 24px;font-size:17px">Send on WhatsApp</a>
 <button id="copyBtn" class="ghost" type="button" style="background:transparent;cursor:pointer;font:inherit;font-size:16px;padding:14px 24px;min-height:44px">Copy message only</button>
 </div>
@@ -321,6 +322,7 @@ var INSTAGRAM = 'resin_rush_xo';
   var waDigits = String(WHATSAPP).replace(/\D/g, '');
 
   $('igBtn').href = 'https://ig.me/m/' + INSTAGRAM;
+  $('igProfile').href = 'https://www.instagram.com/' + INSTAGRAM + '/';
   if (waDigits) {
     $('footWa').textContent = 'WhatsApp: +' + waDigits;
   }
